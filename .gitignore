@@ -1,0 +1,9 @@
+node_modules/
+dist/
+research/
+*.tmp
+*.log
+.env
+.env.*
+!.env.example
+video_*_analysis_*.md
