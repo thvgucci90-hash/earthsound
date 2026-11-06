@@ -1,25 +1,21 @@
-# Proveniência de dados do EarthSound
 
-## Temperatura global
 
-A experiência de 2021 usa GISTEMP v4 do NASA Goddard Institute for Space Studies (GISS). O arquivo local `public/data/gistemp-2021.json` é um recorte de doze meses da grade oficial regular de 2° × 2° “Land-Ocean Temperature Index, ERSSTv5, 1200km smoothing”, baixada de `https://data.giss.nasa.gov/pub/gistemp/gistemp1200_GHCNv4_ERSSTv5.nc.gz`. O campo original `tempanomaly` é reportado em kelvin como diferença, numericamente equivalente a uma anomalia em °C. A linha de médias globais mensais vem do CSV NASA `https://data.giss.nasa.gov/gistemp/tabledata_v4/GLB.Ts+dSST.csv`; a tabela descreve desvios em relação à média de 1951–1980. O arquivo NetCDF NASA consultado para o recorte registra geração em 22 de outubro de 2026. Valores são arredondados a três casas na grade local e convertidos de °C para °F quando mostrados.
+## Biblioteca audiovisual NASA SVS
 
-A série global de 2021 no CSV consultado, em anomalias °C, é: jan 0,81; fev 0,64; mar 0,89; abr 0,76; mai 0,79; jun 0,85; jul 0,92; ago 0,81; set 0,92; out 0,98; nov 0,92; dez 0,88. Ela é dinâmica e pode ser revisada pela NASA. A interface preserva a anomalia como diferença relativa, nunca como temperatura absoluta.
+A página `/materiais` incorpora os recursos de mídia do NASA Scientific Visualization Studio. Textos, unidades, períodos, limites e arquivos são conferidos nas páginas-fonte, listadas junto de cada item em `src/data/nasaResources.ts`. Os vídeos são transmitidos diretamente dos servidores NASA SVS; não há ingestão de um serviço de terceiros nem alegação de uma API EIC ativa.
 
-Médias para as regiões escolhidas no EarthSound são agregações descritivas próprias das células da grade NASA, ponderadas por cos(latitude). São derivadas reproduzíveis da grade, não produtos oficiais da NASA para essas regiões. A legenda de cor é uma codificação visual da grade, e as leituras numéricas são calculadas a partir dos valores de dados. A grade NASA 1200 km é suavizada; sua resolução nominal 2° × 2° não deve ser lida como precisão local.
+| Recurso | Fonte oficial | Mídia usada | Faixa de áudio do arquivo escolhido |
+| --- | --- | --- | --- |
+| Ozone Minimum Concentrations, 1979–2018 | https://svs.gsfc.nasa.gov/30889/ | https://svs.gsfc.nasa.gov/vis/a030000/a030800/a030889/annual_ozone_min_v4_daily_720p.mp4 | sem faixa |
+| Antarctic Ozone Sequence, 1979–2004 | https://svs.gsfc.nasa.gov/3264/ | https://svs.gsfc.nasa.gov/vis/a000000/a003200/a003264/ozone_NTSC.webmhd.webm | sem faixa |
+| Greenland Ice Loss, 2002–2016 | https://svs.gsfc.nasa.gov/30879/ | https://svs.gsfc.nasa.gov/vis/a030000/a030800/a030879/grace_greenland_720p.mp4 | sem faixa |
+| Atmospheric CO₂ Trends | https://svs.gsfc.nasa.gov/30556/ | https://svs.gsfc.nasa.gov/vis/a030000/a030500/a030556/pumphandle_hyper_2022_1080p.webm | Opus estéreo, 48 kHz |
+| 20 Years of Global Biosphere | https://svs.gsfc.nasa.gov/4596/ | https://svs.gsfc.nasa.gov/vis/a000000/a004500/a004596/biosphere7_mollweide_1080p30.webm | sem faixa |
+| Amazon Deforestation | https://svs.gsfc.nasa.gov/30166/ | https://svs.gsfc.nasa.gov/vis/a030000/a030100/a030166/woc_AmazonDeforestation.webmhd.webm | sem faixa |
+| Impact of Climate Change on Global Agricultural Yields | https://svs.gsfc.nasa.gov/4974/ | https://svs.gsfc.nasa.gov/vis/a000000/a004900/a004974/AgMapMaize.webm | Opus estéreo, 48 kHz |
+| Global Temperature Anomalies, 1880–2021 | https://svs.gsfc.nasa.gov/4964/ | https://svs.gsfc.nasa.gov/vis/a000000/a004900/a004964/2021GISStempF-5yrAvg.webm | Opus estéreo, 48 kHz |
+| NASA Climate Spiral, 1880–Present | https://svs.gsfc.nasa.gov/5190/ | https://svs.gsfc.nasa.gov/vis/a000000/a005100/a005190/GISTEMP_Spiral_English_degC_2160p60.mp4 | sem faixa |
 
-O script `scripts/prepare_gistemp.py` reproduz o recorte com Python e `netCDF4`; use `requirements-data.txt` para o ambiente de dados. Os arquivos fonte são públicos e sua proveniência permanece indicada na interface.
+A presença/ausência refere-se somente a uma faixa técnica no arquivo de mídia exato indicado acima. Os fluxos foram inspecionados em 6 de novembro de 2026 com `ffprobe`; identificação da faixa não é transcrição, análise do conteúdo falado nem garantia sobre versões alternativas desses vídeos. Na interface, os três arquivos com faixa recebem o áudio nativo do player; os seis arquivos sem faixa continuam acessíveis pela narração em português/inglês do EarthSound, explicitamente identificada como narração criada pelo app. A leitura não simula uma medição sonora do fenômeno.
 
-## Ozônio antártico
-
-A timeline disponibiliza oito mapas anuais NASA Earth Observatory “World of Change: Antarctic Ozone Hole”: 1983, 1988, 1993, 1998, 2003, 2008, 2013 e 2018. As imagens são cópias locais dos recursos `ozone_YYYY.jpg` do acervo NASA Earth Observatory; os metadados da página atribuem a série a TOMS (1979–2004), OMI (2005–2011) e OMPS (2012–2019). Fonte: `https://science.nasa.gov/earth/earth-observatory/world-of-change/ozone-hole/`.
-
-Dobson Unit (DU) é unidade de coluna total de ozônio. O mapa usa o limiar de 220 DU para identificar a área chamada de buraco; não significa que haja um vazio sem ozônio. A NASA explica que os mapas mostram o dia de maior profundidade e que máximos de área e mínimos de concentração podem ocorrer em anos diferentes. O EarthSound não estima números nem áreas a partir das cores dos pixels e, por isso, não faz sonificação quantitativa desses mapas. A página fornece leitura falada e comparação visual para os anos disponíveis.
-
-## Ilustração da página inicial
-
-A imagem Blue Marble usada como ilustração foi obtida no resultado “Earth — The Blue Marble” da NASA Science. Ela é decorativa/de contexto e não representa um mapa dos dados GISTEMP. Fonte: `https://science.nasa.gov/resource/blue-marble-earth/`. Crédito exibido: NASA.
-
-## Material fornecido
-
-O vídeo `EVOLUÇÃODO.mp4` serviu como referência visual: ozônio antártico aparece aproximadamente entre 00:04 e 00:50 e o mapa GISTEMP de 2021 por volta de 01:05–01:36. Ele lista escalas, datas e conceitos, mas não fornece arquivos originais de grade/serie em formato tabular. Quadros de anos não solicitados no controle não são renomeados nem usados como substitutos.
+Notas científicas preservadas: a página de “Ozone Minimum Concentrations” traz uma discrepância interna — título/descrição indicam 1979–2018, mas uma legenda do vídeo indica 1979–2016 — e a animação mostra somente o mínimo anual. Na sequência de ozônio do Smithsonian, a página informa lacunas removidas em datas de 1998, 2002 e 2003; os conjuntos Ozone Depth/Size listados começam em 1996. Em CO₂, linhas de Mauna Loa, Polo Sul, tendência global e satélite AIRS/AMSU têm origens/intervalos distintos e não devem ser apresentadas como uma única série. Na biosfera, as cores do oceano (clorofila) e da terra (NDVI) representam variáveis diferentes. “Amazon Deforestation” representa Rondônia, não toda a Amazônia, e não publica uma escala numérica das cores. Agricultura são projeções condicionais de modelos até 2100, não resultados observados. O filme de temperatura GISTEMP tem quadros de média móvel de cinco anos; o quadro final é 2017–2021, não 2021 isolado. A espiral é uma série global agregada. Nenhum desses limites altera a origem NASA dos materiais.

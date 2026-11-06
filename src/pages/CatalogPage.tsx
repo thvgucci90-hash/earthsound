@@ -1,5 +1,5 @@
 import { useMemo, useState } from 'react';
-import { ArrowUpRight, AudioLines, CircleDot, Globe2 } from 'lucide-react';
+import { ArrowUpRight, AudioLines, CircleDot, Film, Globe2 } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { copy } from '../data/i18n';
 import { useApp } from '../context/AppContext';
@@ -23,5 +23,6 @@ export function CatalogPage() {
     <div className="catalog-filter" role="group" aria-label={locale === 'pt' ? 'Filtrar catálogo' : 'Filter catalog'}>{filters.map((item) => <button key={item.id} type="button" className={filter === item.id ? 'filter-chip selected' : 'filter-chip'} aria-pressed={filter === item.id} onClick={() => setFilter(item.id)}>{item.label}</button>)}</div>
     <div className="catalog-grid">{shown.map((item, index) => <article key={item.id} className={`catalog-card catalog-card-${item.tone}`}><div className="catalog-card-top"><span className="catalog-number">0{index + 1}</span><span className="catalog-icon">{item.icon}</span><span className="catalog-live"><span />{item.id === 'temperature' ? ui.catalog.statusLive : ui.catalog.statusImage}</span></div><p className="eyebrow">{item.eyebrow}</p><h2>{item.title}</h2><p className="catalog-description">{item.description}</p><div className="catalog-card-meta"><span>{item.source}</span><span>{item.meta}</span></div><Link to={item.href} className="catalog-open">{ui.catalog.open}<ArrowUpRight size={17} /></Link></article>)}</div>
     <aside className="catalog-footnote"><AudioLines size={18} /><p>{ui.catalog.note}</p></aside>
+    <section className="catalog-media-promo panel" aria-labelledby="catalog-media-title"><span className="catalog-media-icon"><Film size={22} aria-hidden="true" /></span><div><p className="eyebrow">NASA SCIENTIFIC VISUALIZATION STUDIO · 9 {locale === 'pt' ? 'RECURSOS' : 'RESOURCES'}</p><h2 id="catalog-media-title">{locale === 'pt' ? 'Explore as animações oficiais da NASA' : 'Explore official NASA visualizations'}</h2><p>{locale === 'pt' ? 'Vídeos interativos sobre ozônio, gelo, atmosfera, biosfera, Amazônia, agricultura e clima, com trilha de áudio verificada e narração acessível.' : 'Interactive videos about ozone, ice, the atmosphere, biosphere, Amazon, agriculture and climate, with verified audio-track status and accessible narration.'}</p></div><Link to="/materiais" className="button button-primary">{locale === 'pt' ? 'Abrir biblioteca' : 'Open media library'}<ArrowUpRight size={15} aria-hidden="true" /></Link></section>
   </div>;
 }

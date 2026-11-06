@@ -61,3 +61,34 @@ A exploração guiada conduz em sete etapas: fenômeno, leitura/escala, mapa, in
 - Vídeo anexado: referência visual para mapas GISTEMP de 2021 e o segmento NASA Ozone Watch; não substitui grade/dados numéricos nem autoriza atribuir anos incorretos a quadros.
 
 README e documentação local explicam instalação, execução e build estática, comandos de voz, suporte progressivo, unidades, período-base, cálculo regional, sensores dos mapas de ozônio e limitações científicas.
+
+
+## Extensão aprovada — correções de fala e biblioteca NASA
+
+A solicitação de 2026-11-06 requer corrigir os bugs relatados no comando de voz e na leitura em voz alta, integrar interativamente todos os recursos da coleção compartilhada no Notion e atualizar o Git. A página “Arquivos” expõe materiais do NASA Scientific Visualization Studio sobre ozônio antártico (duas animações históricas), perda de gelo na Groenlândia, tendências de CO₂ atmosférico, biosfera global, desmatamento na Amazônia, rendimentos agrícolas sob mudança climática, anomalias globais de temperatura 1880–2021 e a espiral climática NASA. A implementação mantém proveniência e alegações específicas somente após conferência de cada página NASA oficial.
+
+### Leitura e reconhecimento de voz
+
+Substituir a síntese fragmentária do contexto por um mecanismo de narração controlado, com fila de enunciados curtos, cancelamento previsível, pausa/retomada, erro/indisponibilidade e seleção de voz compatível com `pt-BR` ou `en-US`. A ação de “ler esta página” extrai o conteúdo semântico da página ativa (títulos, explicações, descrições e legendas, sem a navegação repetida nem rótulos de botões), e as ações de ler descrição continuam específicas de cada visualização. Anúncios para leitores de tela comunicam o estado da leitura sem repetir toda a narração no canal live.
+
+A camada Web Speech recognition permanece progressiva: comandos normalizados executam somente as ações mapeadas, ignoram resultados duplicados e não interpretam a síntese de saída como nova entrada. Erros `no-speech`, permissão, rede, indisponibilidade ou fim inesperado geram estados localizados e permitem reiniciar manualmente. Troca de idioma não mantém um reconhecedor com locale antigo. Firefox e browsers sem reconhecimento mantêm uma alternativa de teclado/controles. Nenhuma integração de microfone ou serviço externo é declarada como obrigatória.
+
+### Biblioteca audiovisual NASA
+
+Criar `src/data/nasaResources.ts` com metadados auditados e `src/pages/MaterialsPage.tsx` com filtros, cards navegáveis e um player acessível para a mídia oficial, acompanhado de fonte, período, descrição, controles de áudio/vídeo e botão de leitura pt-BR/EN. Organizar os temas (ozônio, criosfera, atmosfera, biosfera, Amazônia, agricultura e temperatura/clima) sem confundir observação com projeção. Recursos remotos são streamados pela origem NASA, sem baixar MP4 muito grandes para a build estática; a UI trata indisponibilidade de rede com link à fonte. Se houver faixa de áudio original, usar o áudio do player; narração EarthSound é identificada como tal. Séries numéricas existentes podem usar sonificação apenas quando o dado e a transformação estejam disponíveis e explicitados. Não se infere dado numérico dos pixels dos vídeos nem se sonifica por valor uma animação visual sem suporte quantitativo. Mídias ficam separadas das duas explorações atuais (ozônio em mapas fixos e GISTEMP 2021 sincronizado).
+
+Responsabilidades de novos módulos: `src/hooks/useSpeechSynthesis.ts` administra a fila e o ciclo de leitura; `src/data/nasaResources.ts` mantém a lista auditada; `src/pages/MaterialsPage.tsx` e componentes pequenos de biblioteca/player exibem conteúdos com provenance; `src/data/i18n.ts` traduz textos funcionais PT/EN; `src/components/Shell.tsx`, `src/pages/CatalogPage.tsx`, `src/App.tsx` e `public/manus-routes.json` integram o acesso às rotas existentes e `/materiais`. README e documentação de proveniência descrevem fontes, reprodução e limites. O projeto continua SPA estática React + TypeScript + Vite, sem servidor adicional.
+
+Após build e revisão do comportamento, manter o site existente publicado com o mesmo endereço e atualizar os arquivos Git no repositório de usuário conectado, sem expor/alterar segredos e preservando o `origin` interno do WebDev. A publicação de novos arquivos à URL pública exige um novo checkpoint e a operação Publish autorizada no contexto de atualização do MVP; a visibilidade do site permanece pública.
+
+
+### Alternativa por texto para navegadores sem reconhecimento de voz
+
+A central de acessibilidade também oferecerá um campo de comando textual. Ele usa o mesmo parser pt-BR/EN da fala e o mesmo despacho de ações; não requer microfone, extensão ou serviço externo. Isso permite executar os comandos em Firefox e outros navegadores sem SpeechRecognition, sem anunciar que o próprio navegador reconhece voz quando não reconhece.
+
+
+### Comandos vocais de leitura
+
+“Pausar leitura”, “Retomar leitura” e “Parar leitura” são comandos distintos dos controles de áudio científico. A confirmação de estado é acessível sem interromper indevidamente a fila de voz; quando a leitura está pausada, o reconhecimento pode voltar a escutar para aceitar “Retomar leitura”. Interromper a síntese antes da confirmação evita que o microfone capte a própria voz gerada e crie uma sequência de comandos acidental.
+
+Os mesmos três comandos ficam disponíveis em inglês (“Pause reading”, “Resume reading”, “Stop reading”), na lista falada e no campo textual; Escape interrompe a leitura e o áudio ativo. Se a voz TTS estiver falando, o microfone aguarda sua conclusão e retoma sem anunciar continuamente a mesma mensagem em silêncio.

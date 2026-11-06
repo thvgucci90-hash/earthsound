@@ -39,7 +39,7 @@
 
 - Implementar reconhecimento de voz pt-BR quando suportado e usar o idioma selecionado (PT-BR/EN-US) quando a API permitir; oferecer botão visível de ativação/desativação do microfone, pedir permissão no momento apropriado e tratar recusa/indisponibilidade.
 - Exibir estado textual de microfone desativado, aguardando comando, escutando, comando reconhecido e comando não compreendido; confirmar verbalmente comandos reconhecidos.
-- Comandos de voz executam ações reais: “Abrir início”, “Começar exploração”, “Abrir temperatura”, “Explorar região fria”, “Explorar região quente”, “Ouvir dados”, “Pausar áudio”, “Retomar áudio”, “Parar áudio”, “Abrir camada de ozônio”, “Selecionar ano 2018”, “Ler descrição”, “Aumentar volume”, “Diminuir volume”, “Onde estou?”, “Voltar” e “Ajuda”; comandos equivalentes em inglês acompanham a seleção de idioma.
+- Comandos de voz executam ações reais: “Abrir início”, “Abrir materiais NASA”, “Começar exploração”, “Abrir temperatura”, “Explorar região fria”, “Explorar região quente”, “Ouvir dados”, “Pausar áudio”, “Retomar áudio”, “Parar áudio”, “Pausar leitura”, “Retomar leitura”, “Parar leitura”, “Abrir camada de ozônio”, “Selecionar ano 2018”, “Ler descrição”, “Ler esta página”, “Aumentar volume”, “Diminuir volume”, “Onde estou?”, “Voltar” e “Ajuda”; comandos equivalentes em inglês acompanham a seleção de idioma.
 - Implementar leitura em voz alta pt-BR e EN para apresentação inicial, visualizações, fenômenos, instruções de navegação, legendas dos gráficos, significado da sonificação e confirmação de ações, com comandos para iniciar, pausar e interromper a leitura.
 - Implementar suporte progressivo a navegadores: detectar recursos disponíveis; voz não é indispensável para navegação. Firefox e navegadores sem reconhecimento de voz oferecem alternativa visível e mantêm navegação, gráficos, áudio, teclado e demais recursos funcionais.
 
@@ -64,3 +64,23 @@
 - Tratar suporte do microfone, estados de carregamento/erro e compatibilidade com navegadores sem bloquear as alternativas funcionais.
 - Disponibilizar código organizado e executável e instruções para instalação, desenvolvimento e build.
 - Cobrir a experiência completa solicitada: o usuário entra, inicia a exploração, seleciona visualização, compreende o fenômeno pela descrição, observa a resposta auditiva, usa os controles de áudio, aciona comandos de voz quando suportados, recebe orientação falada, navega sem mouse, consulta descrição textual dos gráficos e usa a interface em tela menor. Limitações científicas e técnicas estão claramente informadas.
+
+
+## 9. Correção de comandos de voz e leitura em voz alta — solicitação de 2026-11-06
+
+- O usuário relatou: “o mvp apresentou bugs no comando de voz, leitura”. Corrigir o reconhecimento e a leitura falada nas páginas e controles existentes; manter o idioma selecionado, tratar retomada/interrupção, comandos repetidos, permissões, indisponibilidade e mensagens de estado, sem bloquear navegação por teclado, mouse ou controles convencionais.
+- Ler em voz alta o conteúdo útil da página atual, seus títulos, explicações, legendas e descrições, em PT-BR/EN, não apenas um resumo fixo genérico; fornecer ações funcionais para iniciar, pausar, retomar e interromper a leitura, com estado acessível.
+- Os comandos continuam executando ações reais e têm alternativas convencionais; a confirmação de comando não deve cancelar imediatamente a leitura solicitada nem criar um ciclo causado pela captação do próprio áudio. Quando o navegador não oferece reconhecimento de voz (por exemplo, Firefox), uma alternativa visível por texto deve aceitar os mesmos comandos e despachar as mesmas ações, sem exigir microfone.
+
+## 10. Biblioteca interativa de materiais NASA compartilhados no Notion
+
+- O usuário solicitou: “quero a implementação desses materiais no mvp de maneira interativa com audios etc:” seguido de https://app.notion.com/p/Arquivos-3fc7afa0b0a9806a8813edac2ee4bdde?source=copy_link.
+- Incorporar na navegação e no catálogo do EarthSound os recursos NASA listados nessa página: “Ozone Minimum Concentrations, 1979–2018”; “Smithsonian Exhibit: Antarctic Ozone Sequence 1979 through 2004”; “Greenland Ice Loss 2002–2016”; “Atmospheric CO₂ Trends”; “20 Years of Global Biosphere (updated)”; “Amazon Deforestation”; “Impact of Climate Change on Global Agricultural Yields”; “Global Temperature Anomalies from 1880 to 2021”; e “NASA Climate Spiral 1880–Present”. Manter títulos, links e proveniência oficiais.
+- Cada recurso é selecionável e abre mídia oficial utilizável no app (player com controles de vídeo e áudio disponíveis pela fonte), com título, descrição inteligível, período, fonte e texto acessível. Oferecer narração falada em português e inglês, bem como pausa/retomada/parada e controle visual de reprodução; oferecer seleção de períodos/cenas somente quando a mídia permitir.
+- Preservar mídia/áudio originais da NASA quando publicados; quando uma animação não tiver trilha falada ou sonora confirmada, oferecer explicação falada pt-BR/EN e deixar claro que é narração do EarthSound. Não dizer que o vídeo possui áudio se isso não foi verificado.
+- Sonificar numericamente uma visualização apenas quando existir série numérica confiável e seu mapeamento puder ser explicado; não inferir valores dos pixels dos vídeos/mapas nem criar medições ou resultados científicos. Para material apenas visual, manter reprodução interativa, leitura/narração e áudio descritivo sem falsa sonificação quantitativa.
+- Permitir buscar/filtrar materiais por fenômeno/categoria e voltar ao catálogo/experiências existentes; manter foco, operação por teclado, leitores de tela, textos PT/EN, layout responsivo e estado de falha caso mídia remota não carregue.
+
+## 11. Sincronização da entrega Git
+
+- O usuário solicitou: “apos fazer as correcoes ajuste tudo no git tambem”. Após implementar e compilar as correções e o novo conteúdo, registrar as mudanças no histórico do projeto e sincronizar a branch principal do repositório GitHub existente `thvgucci90-hash/earthsound`, preservando o remote `origin` interno do WebDev e sem alterar a visibilidade privada já selecionada para o código.

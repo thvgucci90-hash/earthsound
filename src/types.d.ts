@@ -3,13 +3,14 @@ export {};
 declare global {
   interface EarthSoundSpeechResult extends ArrayLike<{ transcript: string; confidence?: number }> { readonly isFinal: boolean }
   interface EarthSoundSpeechResultList extends ArrayLike<EarthSoundSpeechResult> {}
-  interface EarthSoundSpeechEvent extends Event { readonly results: EarthSoundSpeechResultList }
-  interface EarthSoundSpeechErrorEvent extends Event { readonly error: string }
-  interface EarthSoundSpeechRecognition {
-    lang: string;
-    continuous: boolean;
-    interimResults: boolean;
-    onresult: ((event: EarthSoundSpeechEvent) => void) | null;
+interface EarthSoundSpeechEvent extends Event { readonly results: EarthSoundSpeechResultList; readonly resultIndex?: number }
+interface EarthSoundSpeechErrorEvent extends Event { readonly error: string }
+interface EarthSoundSpeechRecognition {
+  lang: string;
+  continuous: boolean;
+  interimResults: boolean;
+  onstart: (() => void) | null;
+  onresult: ((event: EarthSoundSpeechEvent) => void) | null;
     onerror: ((event: EarthSoundSpeechErrorEvent) => void) | null;
     onend: (() => void) | null;
     start(): void;
