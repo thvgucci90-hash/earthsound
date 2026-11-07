@@ -692,6 +692,40 @@ html[data-contrast='high'] .page-subtitle, html[data-contrast='high'] .experienc
 .material-audio-status strong { font-size: calc(9px * var(--text-scale, 1)); }
 .material-audio-status p { margin: 4px 0 0; color: #91a5af; font-size: calc(8px * var(--text-scale, 1)); line-height: 1.5; }
 .material-audio-absent { color: var(--yellow); }
+.material-sonification { display: grid; gap: 9px; margin-top: 13px; padding: 12px; border: 1px solid rgba(78, 217, 223, .28); border-radius: 6px; background: linear-gradient(145deg, rgba(14, 37, 49, .72), rgba(5, 13, 20, .9)); }
+.material-sonification-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; color: var(--cyan); }
+.material-sonification-heading .eyebrow { margin: 0 0 4px; color: #83c9ce; font-size: calc(7px * var(--text-scale, 1)); }
+.material-sonification h3 { margin: 0; color: var(--text); font-size: calc(13px * var(--text-scale, 1)); letter-spacing: -.02em; text-transform: none; }
+.material-sonification-mode { margin: 0; color: var(--yellow); font-family: var(--mono); font-size: calc(7px * var(--text-scale, 1)); line-height: 1.5; }
+.material-sonification-mapping, .material-sonification-limitation, .material-sonification-original { margin: 0; color: #a3b4bb; font-size: calc(8px * var(--text-scale, 1)); line-height: 1.55; }
+.material-sonification-limitation { padding-top: 8px; border-top: 1px solid var(--line-soft); }
+.material-sonification-current { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 5px 10px; padding: 8px 9px; border: 1px solid var(--line-soft); border-radius: 4px; background: rgba(2, 9, 15, .5); }
+.material-sonification-current span { color: #90a4ad; font-size: calc(7px * var(--text-scale, 1)); }
+.material-sonification-current strong { color: var(--cyan); font-family: var(--mono); font-size: calc(8px * var(--text-scale, 1)); font-weight: 500; text-align: right; }
+.material-sonification-progress { display: flex; align-items: center; gap: 8px; color: #8fa2aa; font-family: var(--mono); font-size: calc(7px * var(--text-scale, 1)); }
+.material-sonification-progress progress { width: 100%; height: 4px; accent-color: var(--cyan); }
+.material-sonification-controls { display: flex; flex-wrap: wrap; gap: 6px; }
+.material-sonification-controls .button { flex: 0 0 auto; gap: 5px; }
+.material-sonification-settings { display: grid; grid-template-columns: minmax(0, 1fr) auto; align-items: end; gap: 10px; }
+.material-sonification-field, .material-sonification-range { display: grid; min-width: 0; gap: 5px; color: #91a5af; font-size: calc(7px * var(--text-scale, 1)); }
+.material-sonification-field select { min-height: 32px; max-width: 100%; padding: 0 8px; border: 1px solid var(--line); border-radius: 4px; color: var(--text); background: #091823; font-size: calc(8px * var(--text-scale, 1)); }
+.material-sonification-range > span { display: flex; align-items: center; gap: 5px; }
+.material-sonification-range input { width: 100%; accent-color: var(--cyan); }
+.material-sonification-categories { display: grid; gap: 8px; }
+.material-sonification-categories h4 { margin: 0; color: var(--text); font-size: calc(9px * var(--text-scale, 1)); }
+.material-sonification-category-group { display: grid; gap: 5px; }
+.material-sonification-category-group > p { margin: 0; color: #8fa4ad; font-size: calc(7px * var(--text-scale, 1)); }
+.material-sonification-category-list { display: grid; gap: 5px; }
+.material-sonification-category { display: flex; width: 100%; align-items: flex-start; gap: 7px; padding: 7px 8px; border: 1px solid var(--line-soft); border-radius: 4px; color: var(--cyan); background: rgba(4, 14, 21, .64); text-align: left; cursor: pointer; }
+.material-sonification-category:hover, .material-sonification-category[aria-pressed='true'] { border-color: rgba(78, 217, 223, .55); background: rgba(78, 217, 223, .08); }
+.material-sonification-category > svg { flex: 0 0 auto; margin-top: 1px; }
+.material-sonification-category > span { display: grid; gap: 3px; }
+.material-sonification-category strong { color: var(--text); font-size: calc(8px * var(--text-scale, 1)); font-weight: 600; }
+.material-sonification-category small { color: #96aab3; font-size: calc(7px * var(--text-scale, 1)); line-height: 1.45; }
+.material-sonification-source { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 6px; font-size: calc(7px * var(--text-scale, 1)); }
+.material-sonification-source a { color: var(--cyan); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+.material-sonification-source span { color: #8298a1; font-family: var(--mono); }
+.material-sonification-status { margin: 0; color: #8fd1d4; font-size: calc(7px * var(--text-scale, 1)); }
 .material-narration { display: flex; align-items: flex-start; gap: 10px; margin-top: 12px; }
 .material-narration-controls { display: flex; flex: 0 0 auto; flex-wrap: wrap; gap: 6px; }
 .material-narration .button { flex: 0 0 auto; gap: 6px; }
@@ -738,6 +772,10 @@ html[data-contrast='high'] .page-subtitle, html[data-contrast='high'] .experienc
   .material-transport { flex-wrap: wrap; }
   .material-rate-volume { align-items: flex-start; flex-direction: column; }
   .material-volume input { width: min(56vw, 230px); }
+  .material-sonification-settings { grid-template-columns: 1fr; }
+  .material-sonification-controls { align-items: stretch; }
+  .material-sonification-controls .button { flex: 1 1 auto; justify-content: center; }
+  .material-sonification-source { flex-direction: column; }
   .material-card { grid-template-columns: 90px minmax(0, 1fr) 17px; gap: 10px; padding: 11px 3px; }
   .material-card-thumb { width: 90px; }
   .material-card-copy > span:not(.material-card-category) { display: none; }
@@ -754,3 +792,9 @@ html[data-contrast='high'] .page-subtitle, html[data-contrast='high'] .experienc
 }
 html[data-contrast='high'] .catalog-media-promo, html[data-contrast='high'] .material-viewer, html[data-contrast='high'] .material-card, html[data-contrast='high'] .voice-command-form { background-color: #050505; }
 html[data-contrast='high'] .material-description, html[data-contrast='high'] .material-fact p, html[data-contrast='high'] .material-card-copy > span { color: #e0f2f5; }
+
+html[data-contrast='high'] .material-sonification { color: #fff; border-color: #fff; background: #050505; }
+html[data-contrast='high'] .material-sonification-mapping, html[data-contrast='high'] .material-sonification-limitation, html[data-contrast='high'] .material-sonification-original, html[data-contrast='high'] .material-sonification-category small, html[data-contrast='high'] .material-sonification-current span, html[data-contrast='high'] .material-sonification-source span { color: #f2f2f2; }
+html[data-contrast='high'] .material-sonification-mode, html[data-contrast='high'] .material-sonification-status { color: #ffff00; }
+html[data-contrast='high'] .material-sonification-current, html[data-contrast='high'] .material-sonification-category { color: #fff; border-color: #fff; background: #000; }
+html[data-contrast='high'] .material-sonification-current strong, html[data-contrast='high'] .material-sonification-category strong, html[data-contrast='high'] .material-sonification-source a { color: #8ff; }

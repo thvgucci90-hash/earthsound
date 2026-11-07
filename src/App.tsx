@@ -1,13 +1,14 @@
-import { useEffect } from 'react';
+import { lazy, Suspense, useEffect } from 'react';
 import { Navigate, Route, Routes, useLocation, useNavigate } from 'react-router-dom';
 import { useApp } from './context/AppContext';
 import { Shell } from './components/Shell';
 import { HomePage } from './pages/HomePage';
 import { CatalogPage } from './pages/CatalogPage';
-import { MaterialsPage } from './pages/MaterialsPage';
 import { TemperaturePage } from './pages/TemperaturePage';
 import { OzonePage } from './pages/OzonePage';
 import { AccessibilityPage } from './pages/AccessibilityPage';
+
+const MaterialsPage = lazy(() => import('./pages/MaterialsPage').then(({ MaterialsPage: page }) => ({ default: page })));
 
 function VoiceRouter() {
   const navigate = useNavigate();
@@ -94,6 +95,11 @@ function FocusRouteHeading() {
   return null;
 }
 
+function MaterialsLoading() {
+  const { locale } = useApp();
+  return <div className="page-wrap"><p role="status" aria-live="polite">{locale === 'pt' ? 'Carregando os materiais NASA…' : 'Loading NASA materials…'}</p></div>;
+}
+
 export function App() {
   return (
     <>
@@ -103,7 +109,7 @@ export function App() {
         <Route element={<Shell />}>
           <Route path="/" element={<HomePage />} />
           <Route path="/catalogo" element={<CatalogPage />} />
-          <Route path="/materiais" element={<MaterialsPage />} />
+          <Route path="/materiais" element={<Suspense fallback={<MaterialsLoading />}><MaterialsPage /></Suspense>} />
           <Route path="/explorar/temperatura" element={<TemperaturePage />} />
           <Route path="/explorar/ozonio" element={<OzonePage />} />
           <Route path="/acessibilidade" element={<AccessibilityPage />} />

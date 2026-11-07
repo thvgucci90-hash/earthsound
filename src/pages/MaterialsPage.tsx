@@ -5,6 +5,8 @@ import { useApp } from '../context/AppContext';
 import { materialCopy } from '../data/materialCopy';
 import { nasaResources, type MaterialCategory, type NASAResource } from '../data/nasaResources';
 import { PageIntro, SourceLink } from '../components/Common';
+import { MaterialSonificationPanel } from '../components/MaterialSonificationPanel';
+import { getMaterialSonificationProfile } from '../data/materialSonification';
 
 const categories: Array<'all' | MaterialCategory> = ['all', 'ozone', 'ice', 'atmosphere', 'biosphere', 'land', 'agriculture', 'climate'];
 
@@ -123,7 +125,10 @@ export function MaterialsPage() {
       if (action === 'readDescription' && selected) {
         videoRef.current?.pause();
         setIsPlaying(false);
-        const description = `${selected.title}. ${selected.description[locale]} ${copy.period}: ${selected.period}. ${copy.variable}: ${selected.variables[locale]} ${selected.caution[locale]}`;
+        window.dispatchEvent(new CustomEvent('earthsound:before-read-page'));
+        const soundProfile = getMaterialSonificationProfile(selected.id);
+        const soundDescription = soundProfile ? ` ${copy.sonification.title}. ${soundProfile.modeLabel[locale]}. ${soundProfile.mapping[locale]} ${soundProfile.limitation[locale]}` : '';
+        const description = `${selected.title}. ${selected.description[locale]} ${copy.period}: ${selected.period}. ${copy.variable}: ${selected.variables[locale]} ${selected.caution[locale]}${soundDescription}`;
         speak(description);
       }
     };
@@ -150,11 +155,14 @@ export function MaterialsPage() {
 
   if (!selected) return <div className="page-wrap"><PageIntro eyebrow={copy.eyebrow} title={copy.title} subtitle={copy.subtitle} /><p>{copy.mediaUnavailable}</p></div>;
 
-  const spokenDescription = `${selected.title}. ${selected.description[locale]} ${copy.period}: ${selected.period}. ${copy.variable}: ${selected.variables[locale]} ${selected.caution[locale]} ${audioNote(selected, copy)}`;
+  const soundProfile = getMaterialSonificationProfile(selected.id);
+  const soundDescription = soundProfile ? ` ${copy.sonification.title}. ${soundProfile.modeLabel[locale]}. ${soundProfile.mapping[locale]} ${soundProfile.limitation[locale]}` : '';
+  const spokenDescription = `${selected.title}. ${selected.description[locale]} ${copy.period}: ${selected.period}. ${copy.variable}: ${selected.variables[locale]} ${selected.caution[locale]} ${audioNote(selected, copy)}${soundDescription}`;
   const categoryName = copy.categories[selected.category];
   const startNarration = () => {
     videoRef.current?.pause();
     setIsPlaying(false);
+    window.dispatchEvent(new CustomEvent('earthsound:before-read-page'));
     speak(spokenDescription);
   };
   const readCurrentPage = () => {
@@ -233,6 +241,7 @@ export function MaterialsPage() {
           <div className="material-fact"><h3>{copy.variable}</h3><p>{selected.variables[locale]}</p></div>
           <div className="material-caution"><Info size={15} aria-hidden="true" /><p>{selected.caution[locale]}</p></div>
           <div className={`material-audio-status material-audio-${selected.audioStatus}`}><AudioLines size={16} aria-hidden="true" /><div><strong>{copy.audio}</strong><p>{audioNote(selected, copy)}</p></div></div>
+          <MaterialSonificationPanel key={selected.id} resourceId={selected.id} locale={locale} resourceSourceUrl={selected.pageUrl} />
           <div className="material-narration"><div className="material-narration-controls">
             <button type="button" className="button button-secondary button-small" onClick={speechStatus === 'speaking' ? pauseSpeech : speechStatus === 'paused' ? resumeNarration : startNarration} aria-label={speechStatus === 'speaking' ? copy.pauseNarration : speechStatus === 'paused' ? copy.resumeNarration : copy.listen}>
               <AudioLines size={14} aria-hidden="true" />{speechStatus === 'speaking' ? copy.pauseNarration : speechStatus === 'paused' ? copy.resumeNarration : copy.listen}

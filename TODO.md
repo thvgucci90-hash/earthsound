@@ -84,3 +84,15 @@
 ## 11. Sincronização da entrega Git
 
 - O usuário solicitou: “apos fazer as correcoes ajuste tudo no git tambem”. Após implementar e compilar as correções e o novo conteúdo, registrar as mudanças no histórico do projeto e sincronizar a branch principal do repositório GitHub existente `thvgucci90-hash/earthsound`, preservando o remote `origin` interno do WebDev e sem alterar a visibilidade privada já selecionada para o código.
+
+
+## 12. Sonificação individual dos materiais gráficos NASA — solicitação de 2026-11-07
+
+- O usuário solicitou: “sobre os materiais graficos da nasa, gostaria que criasse sonificacoes para cada um deles, mantendo a mesma estrutura mas add o som que é o ponto principal do projeto”.
+- Adicionar uma camada própria de sonificação EarthSound a cada um dos nove materiais NASA já listados no item 10, mantendo a estrutura atual da biblioteca, os mesmos filtros, cards, player, metadados, links oficiais e narração; o som deve ser uma leitura do conteúdo científico, não música decorativa.
+- Sincronizar o estado sonoro com a linha de tempo do vídeo quando houver: acompanhar iniciar, pausa, retomada, busca/avanço, velocidade, parada e seleção de outro material; atualizar o indicador textual/visual do trecho sonificado. O som só inicia após ação explícita da pessoa.
+- Usar séries numéricas oficiais verificadas para sonificação quantitativa, exibindo variável, unidade, período/referência, fonte e explicação do mapeamento dado→som. Para animações sem série quantitativa disponível, oferecer apenas tradução sonora qualitativa de estados/categorias explicitamente documentados pela fonte NASA, identificada como interpretativa e não quantitativa; não inferir medições por pixels, inventar números ou interpolar valores.
+- Manter trilha original NASA, sonificação EarthSound e narração distintas e controláveis; volume e iniciar/pausar/retomar/parar/reiniciar devem funcionar sem confusão entre os canais. Fornecer descrição textual e estado acessível equivalentes ao som.
+- Manter textos e controles em português e inglês, operação completa por teclado e leitor de tela, responsividade, redução de movimento e as alternativas existentes para navegadores sem reconhecimento de voz.
+- Se uma fonte não fornecer dados numéricos nem estados/categorias documentados suficientes para uma tradução sonora honesta, não simular a sonificação científica: registrar o limite e solicitar dados/fonte ao usuário antes de apresentar um som como representativo.
+- Sincronizar a sonificação com o vídeo apenas quando a correspondência entre valores/datas e quadros/tempo estiver documentada e verificada. Quando a série numérica for relacionada, mas não a série exata do vídeo, ou quando houver apenas estados/categorias, manter a sequência/paleta sonora interativa separada e informar que não há sincronização quadro a quadro.
