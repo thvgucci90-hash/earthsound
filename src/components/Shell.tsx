@@ -1,11 +1,12 @@
 import { useEffect, useState } from 'react';
 import { Link, NavLink, Outlet, useLocation } from 'react-router-dom';
-import { Accessibility, AudioLines, ChevronDown, Home, Languages, Mic, MicOff, X } from 'lucide-react';
+import { Accessibility, ChevronDown, Home, Languages, Mic, MicOff, X } from 'lucide-react';
 import { copy, type Locale } from '../data/i18n';
 import { useApp } from '../context/AppContext';
 import { primeAudioContext } from '../hooks/useSonification';
 import { useVoiceRecognition } from '../hooks/useVoiceRecognition';
 import type { SpeechStatus } from '../hooks/useSpeechSynthesis';
+import { BrandMark } from './BrandMark';
 
 function speechStatusLabel(locale: Locale, status: SpeechStatus) {
   const pt: Record<SpeechStatus, string> = { idle: 'Leitura parada', speaking: 'Lendo em voz alta', paused: 'Leitura pausada', unsupported: 'Leitura em voz alta indisponível neste navegador', error: 'A leitura encontrou um erro' };
@@ -78,7 +79,7 @@ export function Shell() {
       <a className="skip-link" href="#main-content">{ui.nav.skip}</a>
       <header className="topbar">
         <Link to="/" className="wordmark" aria-label="EarthSound — início">
-          <span className="wordmark-symbol" aria-hidden="true"><span /><AudioLines size={15} /></span>
+          <BrandMark className="brand-mark-image header-brand-mark" />
           <span className="wordmark-text"><strong>EarthSound</strong><small>{ui.brand.tagline}</small></span>
         </Link>
         <nav className="primary-nav" aria-label={locale === 'pt' ? 'Navegação principal' : 'Primary navigation'}>
@@ -98,10 +99,11 @@ export function Shell() {
       <div className="mobile-crumb"><Home size={14} aria-hidden="true" /><span>{ui.brand.label}</span><span className="crumb-dot">/</span><span>{location.pathname === '/' ? ui.nav.home : location.pathname === '/catalogo' ? ui.nav.catalog : location.pathname === '/materiais' ? (locale === 'pt' ? 'Materiais NASA' : 'NASA media') : location.pathname.includes('temperatura') ? ui.nav.temperature : location.pathname.includes('ozonio') ? ui.nav.ozone : ui.nav.accessibility}</span></div>
       <main id="main-content" className="main-content"><Outlet /></main>
       <footer className="site-footer">
-        <div className="footer-brand"><span className="wordmark-symbol small" aria-hidden="true"><span /><AudioLines size={12} /></span><strong>EarthSound</strong></div>
+        <div className="footer-brand"><BrandMark className="brand-mark-image footer-brand-mark" /><strong>EarthSound</strong></div>
         <p>{ui.footer.about}</p>
         <a href="https://data.giss.nasa.gov/gistemp/" target="_blank" rel="noreferrer">{ui.footer.credits}</a>
         <button type="button" className="footer-top" onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}>{ui.footer.top} ↑</button>
+        <span className="site-footer-watermark" aria-hidden="true"><BrandMark className="brand-mark-image" /></span>
       </footer>
       <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">{announcement}</div>
       <div className="sr-only" role="status" aria-live="polite" aria-atomic="true">{speechStatus === 'idle' ? '' : speechStatusLabel(locale, speechStatus)}</div>

@@ -96,3 +96,11 @@
 - Manter textos e controles em português e inglês, operação completa por teclado e leitor de tela, responsividade, redução de movimento e as alternativas existentes para navegadores sem reconhecimento de voz.
 - Se uma fonte não fornecer dados numéricos nem estados/categorias documentados suficientes para uma tradução sonora honesta, não simular a sonificação científica: registrar o limite e solicitar dados/fonte ao usuário antes de apresentar um som como representativo.
 - Sincronizar a sonificação com o vídeo apenas quando a correspondência entre valores/datas e quadros/tempo estiver documentada e verificada. Quando a série numérica for relacionada, mas não a série exata do vídeo, ou quando houver apenas estados/categorias, manter a sequência/paleta sonora interativa separada e informar que não há sincronização quadro a quadro.
+
+
+## 13. Identidade visual EarthSound e arquivo para a equipe
+- Criar um símbolo visual original para EarthSound, com conceito abstrato de planeta/contornos e onda sonora, paleta coerente com o MVP (ciano, azul profundo e acento amarelo), sem usar o logotipo, o selo ou outros sinais oficiais da NASA e sem copiar uma marca existente.
+- Aplicar o símbolo no MVP como marca de interface e marca d’água discreta somente em cabeçalho/rodapé; nunca cobrir, redesenhar ou alterar imagens/vídeos NASA, mapas, gráficos, dados, escalas, legendas, fontes ou outra informação científica verificável. Manter a palavra EarthSound em texto acessível da interface; a marca não pode prejudicar contraste, foco, leitores de tela ou layout responsivo.
+- Entregar separadamente um arquivo JPEG quadrado, adequado a imagem de perfil da equipe NASA Space Apps, com o símbolo sobre fundo azul profundo e sem texto gerado por IA.
+- Atualizar `app.config.ts` com `logoUrl` literal para um ativo HTTPS durável, sem remover campos já existentes; manter uma cópia do ativo no projeto para a aplicação.
+- Commitar os arquivos no `origin/main`, sincronizar o repositório GitHub privado existente e publicar a versão atualizada no domínio do EarthSound, após confirmar o checkpoint.

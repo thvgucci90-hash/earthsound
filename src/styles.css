@@ -798,3 +798,29 @@ html[data-contrast='high'] .material-sonification-mapping, html[data-contrast='h
 html[data-contrast='high'] .material-sonification-mode, html[data-contrast='high'] .material-sonification-status { color: #ffff00; }
 html[data-contrast='high'] .material-sonification-current, html[data-contrast='high'] .material-sonification-category { color: #fff; border-color: #fff; background: #000; }
 html[data-contrast='high'] .material-sonification-current strong, html[data-contrast='high'] .material-sonification-category strong, html[data-contrast='high'] .material-sonification-source a { color: #8ff; }
+
+
+/* EarthSound original symbol: kept in interface chrome, away from scientific media. */
+.brand-mark-image {
+  display: block;
+  width: 40px;
+  height: 40px;
+  flex: 0 0 auto;
+  object-fit: contain;
+}
+.header-brand-mark { width: 40px; height: 40px; }
+.footer-brand-mark { width: 26px; height: 26px; }
+.site-footer-watermark {
+  display: block;
+  width: 50px;
+  height: 50px;
+  flex: 0 0 50px;
+  margin-left: 2px;
+  opacity: .18;
+  pointer-events: none;
+  user-select: none;
+}
+.site-footer-watermark .brand-mark-image { width: 100%; height: 100%; }
+@media (max-width: 760px) {
+  .site-footer-watermark { display: none; }
+}

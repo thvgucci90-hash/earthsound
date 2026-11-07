@@ -102,3 +102,7 @@ A estrutura inclui `src/data/materialSonification.ts` para perfis tipados, `src/
 
 
 **Limite de sincronização:** a camada sonora acompanha o `currentTime` do vídeo somente quando a fonte documenta a correspondência entre valores/datas e quadros/tempo. Quando a série numérica é relacionada mas não é exatamente a série do vídeo, ou quando a fonte só identifica categorias, a experiência sonora funciona como sequência/paleta independente e declara essa diferença; não simula sincronismo quadro a quadro.
+
+
+## Extensão: identidade visual original e marca d’água
+Criar um símbolo EarthSound original, abstrato e facilmente reconhecível em tamanho pequeno: contornos de planeta combinados a uma onda sonora, em ciano/azul-petróleo com pequeno acento amarelo, sem NASA insignia, wordmark NASA ou imitação de marca existente. A aplicação usa o símbolo como marca no cabeçalho e marca d’água discreta somente no chrome da interface (cabeçalho/rodapé); não sobrepor, redesenhar, obscurecer ou alterar vídeos, mapas, gráficos, dados, escalas, legendas, fontes ou qualquer parte verificável. A palavra EarthSound permanece como texto real da interface para manter tipografia precisa. Entregar também um JPEG quadrado independente com o mesmo símbolo sobre fundo azul profundo para o perfil da equipe no Space Apps. Atualizar o `logoUrl` literal em `app.config.ts` para um endereço HTTPS durável do símbolo, preservando os demais campos, e incluir os ativos no projeto/GitHub antes do checkpoint e publicação.
