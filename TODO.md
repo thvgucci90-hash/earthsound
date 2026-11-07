@@ -104,3 +104,5 @@
 - Entregar separadamente um arquivo JPEG quadrado, adequado a imagem de perfil da equipe NASA Space Apps, com o símbolo sobre fundo azul profundo e sem texto gerado por IA.
 - Atualizar `app.config.ts` com `logoUrl` literal para um ativo HTTPS durável, sem remover campos já existentes; manter uma cópia do ativo no projeto para a aplicação.
 - Commitar os arquivos no `origin/main`, sincronizar o repositório GitHub privado existente e publicar a versão atualizada no domínio do EarthSound, após confirmar o checkpoint.
+
+**Status: concluído** — símbolo aplicado no cabeçalho/rodapé e favicon; cópia PNG incluída no projeto; JPEG quadrado de 1024 × 1024 validado e entregue em `deliverables/earthsound-team.jpg`.

@@ -1,4 +1,4 @@
-const EARTHSOUND_MARK_SRC = '/manus-storage/async-images/W5YmmCkIoq91yZZKX09omP/image-1.webp';
+const EARTHSOUND_MARK_SRC = '/brand/earthsound-mark.png';
 
 type BrandMarkProps = {
   className: string;
